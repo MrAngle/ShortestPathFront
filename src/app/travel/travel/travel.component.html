@@ -1,0 +1,90 @@
+
+
+
+
+<div class="register-form">
+
+
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <div class="row">
+      <!-- <div class="form-group col-xs-6 col-sm-6">
+        <label>From</label>
+        <input
+          type="text"
+          formControlName="from"
+          class="form-control"
+        />
+        <div *ngIf="submitted && f['from'].errors" class="invalid-feedback">
+          <div *ngIf="f['from'].errors['required']"> is required</div>
+        </div>
+      </div>
+  
+      <div class="form-group col-xs-6 col-sm-6">
+        <label>Destination</label>
+        <input
+          type="text"
+          formControlName="destination"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f['destination'].errors }"
+        />
+        <div *ngIf="submitted && f['destination'].errors" class="invalid-feedback">
+          <div *ngIf="f['destination'].errors['required']">destination is required</div>
+          <div *ngIf="f['destination'].errors['minlength']">
+            destination must be at least 6 characters
+          </div>
+          <div *ngIf="f['destination'].errors['maxlength']">
+            Username must not exceed 20 characters
+          </div>
+        </div>
+      </div> -->
+
+      <!-- <form class="example-form"> -->
+      <div class="form-group col-xs-6 col-sm-6">
+        <mat-label>FROM</mat-label>
+        <mat-form-field class="example-full-width">
+          <input type="text" placeholder="Select start country..." matInput formControlName="from" [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of fromFilteredOptions | async" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group col-xs-6 col-sm-6">
+        <mat-label>Destination</mat-label>
+        <mat-form-field class="example-full-width">
+          <input type="text" placeholder="Select destination country..." matInput formControlName="destination" [matAutocomplete]="destAuto">
+          <mat-autocomplete #destAuto="matAutocomplete">
+            <mat-option *ngFor="let option of destinationFilteredOptions | async" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+      </div>
+    </div>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Calculate</button>
+      <button
+        type="button"
+        (click)="onReset()"
+        class="btn btn-warning float-right"
+      >
+        Reset
+      </button>
+    </div>    
+    
+
+  </form>
+  {{this.results}}
+
+  <form class="example-form">
+
+  </form>
+  
+</div>
+
