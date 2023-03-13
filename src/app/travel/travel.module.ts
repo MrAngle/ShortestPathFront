@@ -7,12 +7,14 @@ import { CountryRoutingService } from '../shared/services/country-routing.servic
 import { CountryDataService } from '../shared/services/country-data.service';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialExampleModule } from 'src/material.module';
+import { CountryDescriptionComponent } from './country-description/country-description.component';
 
 
 
 @NgModule({
   declarations: [
-    TravelComponent
+    TravelComponent,
+    CountryDescriptionComponent
   ],
   providers: [
     CountryRoutingService, CountryDataService

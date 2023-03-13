@@ -1,42 +1,18 @@
 .basic-addon1 {
-    width: 100;
+  width: 100;
 }
-
-// body {
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     height: 100vh;
-  
-//     form {
-//       background-color: #f2f2f2;
-//       padding: 20px;
-//       border-radius: 5px;
-//       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  
-//       label {
-//         display: block;
-//         margin-bottom: 10px;
-//       }
-  
-//       input[type="text"] {
-//         width: 100%;
-//         padding: 10px;
-//         border-radius: 5px;
-//         border: none;
-//         box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.1);
-//       }
-//     }
-//   }
 
 
 .example-form {
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
-  }
-  
-  .example-full-width {
-    width: 100%;
-  }
-  
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.card-margin {
+  margin-top: 10px;
+}

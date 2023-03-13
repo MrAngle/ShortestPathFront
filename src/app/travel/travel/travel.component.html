@@ -1,90 +1,75 @@
-
-
-
-
 <div class="register-form">
-
-
-
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-
     <div class="row">
-      <!-- <div class="form-group col-xs-6 col-sm-6">
-        <label>From</label>
-        <input
-          type="text"
-          formControlName="from"
-          class="form-control"
-        />
-        <div *ngIf="submitted && f['from'].errors" class="invalid-feedback">
-          <div *ngIf="f['from'].errors['required']"> is required</div>
-        </div>
-      </div>
-  
       <div class="form-group col-xs-6 col-sm-6">
-        <label>Destination</label>
-        <input
-          type="text"
-          formControlName="destination"
-          class="form-control"
-          [ngClass]="{ 'is-invalid': submitted && f['destination'].errors }"
-        />
-        <div *ngIf="submitted && f['destination'].errors" class="invalid-feedback">
-          <div *ngIf="f['destination'].errors['required']">destination is required</div>
-          <div *ngIf="f['destination'].errors['minlength']">
-            destination must be at least 6 characters
-          </div>
-          <div *ngIf="f['destination'].errors['maxlength']">
-            Username must not exceed 20 characters
-          </div>
-        </div>
-      </div> -->
-
-      <!-- <form class="example-form"> -->
-      <div class="form-group col-xs-6 col-sm-6">
-        <mat-label>FROM</mat-label>
+        <mat-label>Origin</mat-label>
         <mat-form-field class="example-full-width">
-          <input type="text" placeholder="Select start country..." matInput formControlName="from" [matAutocomplete]="auto">
+          <input type="text" placeholder="Select start country..." matInput formControlName={{ORIGIN_NAME}}
+            [matAutocomplete]="auto">
           <mat-autocomplete #auto="matAutocomplete">
             <mat-option *ngFor="let option of fromFilteredOptions | async" [value]="option">
               {{option}}
             </mat-option>
           </mat-autocomplete>
+          <mat-error *ngIf="this.originControl.invalid">{{originErrorMessage()}}</mat-error>
         </mat-form-field>
       </div>
 
       <div class="form-group col-xs-6 col-sm-6">
         <mat-label>Destination</mat-label>
         <mat-form-field class="example-full-width">
-          <input type="text" placeholder="Select destination country..." matInput formControlName="destination" [matAutocomplete]="destAuto">
+          <input type="text" placeholder="Select destination country..." matInput
+            formControlName={{this.DESTINATION_NAME}} [matAutocomplete]="destAuto">
           <mat-autocomplete #destAuto="matAutocomplete">
             <mat-option *ngFor="let option of destinationFilteredOptions | async" [value]="option">
               {{option}}
             </mat-option>
           </mat-autocomplete>
+          <mat-error *ngIf="this.destinationControl.invalid">{{destinationErrorMessage()}}</mat-error>
         </mat-form-field>
-
       </div>
     </div>
 
     <div class="form-group">
       <button type="submit" class="btn btn-primary">Calculate</button>
-      <button
-        type="button"
-        (click)="onReset()"
-        class="btn btn-warning float-right"
-      >
+      <button type="button" (click)="onReset()" class="btn btn-warning float-right">
         Reset
       </button>
-    </div>    
-    
-
+    </div>
   </form>
-  {{this.results}}
 
-  <form class="example-form">
+  <mat-card class="card-margin" *ngIf="this.results && this.results.data.length === 0 && this.results.errorMessage">
+    <mat-card-header>
+      <mat-card-title>Not possible to calculate path</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      Reason: {{this.results.errorMessage}}
+    </mat-card-content>
+  </mat-card>
 
-  </form>
+  <mat-card class="card-margin" *ngIf="results && this.results.data.length !== 0">
+    <mat-card-header>
+      <mat-card-title>Shortest Path</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-chip-listbox cdkDropListOrientation="horizontal">
+        <mat-chip-option *ngFor="let countryName of this.results.data let last = last;" #myChips
+        (click)="onChipClicked(myChips)">
+          {{countryName}}
+          <span *ngIf="!last; else destinationIcon">
+            ➡
+          </span>
+          <ng-template #destinationIcon>
+            ✘
+          </ng-template>
+        </mat-chip-option>
+      </mat-chip-listbox>
+    </mat-card-content>
+  </mat-card>
+
+  <div *ngIf="!!this.selectedCountryDetails">
+    <app-country-description [countryCode]="this.selectedCountryDetails"></app-country-description>
+  </div>
   
-</div>
 
+</div>

@@ -1,0 +1,11 @@
+<mat-card *ngIf="this.countryCode && this.country">
+    <mat-card-header>
+        <mat-card-title>{{ country.name }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <p><strong>Region:</strong> {{ country.region }}</p>
+        <p><strong>ISO Code:</strong> {{ country.isoCode }}</p>
+        <p><strong>Country Code:</strong> {{ country.countryCode }}</p>
+        <p><strong>Coordinates:</strong> {{ country.coordinates.join(', ') }}</p>
+    </mat-card-content>
+</mat-card>

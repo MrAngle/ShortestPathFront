@@ -1,4 +1,7 @@
 export interface Country {
-    shortName: string;
     name: string;
+    region: string;
+    isoCode: string;
+    countryCode: string;
+    coordinates: number[];
 }
