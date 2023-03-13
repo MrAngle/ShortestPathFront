@@ -8,12 +8,6 @@ export class CountryDataService {
 
   countries: ICountry[] = Country.getAllCountries();
 
-  constructor() {
-    // require('countrycitystatejson');
-  }
-
-  // private countryData = countrycitystatejson;
-
   getAllCountries(): ICountry[] {
     // TODO: map to another type
     return this.countries;
@@ -27,12 +21,4 @@ export class CountryDataService {
     }
     return country.isoCode;
   }
-
-  // getStatesByCountry(countryShotName: string) {
-  //   return this.countryData.getStatesByShort(countryShotName);
-  // }
-
-  // getCitiesByState(country: string, state: string) {
-  //   return this.countryData.getCities(country, state);
-  // }
 }

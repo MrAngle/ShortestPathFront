@@ -1,0 +1,33 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 mr-2">
+            <mat-card *ngFor="let trip of this.trips">
+                <mat-card-header>
+                    <mat-card-title>Trip Name: {{trip.name}}</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <mat-chip-listbox cdkDropListOrientation="horizontal">
+                        <mat-chip *ngFor="let countryName of trip.countries.split(',') let last = last;" #countryOption
+                            (click)="onChipClicked(countryOption)">
+                            {{countryName}}
+                            <span *ngIf="!last; else destinationIcon">
+                                ➡
+                            </span>
+                            <ng-template #destinationIcon>
+                                ✘
+                            </ng-template>
+                        </mat-chip>
+                    </mat-chip-listbox>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+        <div class="col-md-4 mr-2">
+            <app-country-details  [countryCode]="this.selectedCountryDetails"></app-country-details>
+        </div>
+    </div>
+
+
+    
+    
+</div>

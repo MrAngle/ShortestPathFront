@@ -1,12 +1,14 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, DoCheck, OnChanges, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatChip } from '@angular/material/chips';
 import { ICountry } from 'country-state-city';
 import { map, Observable, startWith } from 'rxjs';
 import { CountryResults } from 'src/app/shared/entities/country-results';
+import { Trip } from 'src/app/shared/entities/trip';
 import { CountryDataService } from 'src/app/shared/services/country-data.service';
 import { CountryRoutingService } from 'src/app/shared/services/country-routing.service';
+import { TripService } from 'src/app/shared/services/trip.service';
 
 @Component({
   selector: 'app-travel',
@@ -21,11 +23,11 @@ export class TravelComponent implements OnInit, OnChanges, OnDestroy, DoCheck, A
   readonly MAX_COUNTRY_NAME_LENGTH = 40;
   
   @ViewChildren('myChips') myChips!: QueryList<MatChip>;
+
   results: CountryResults = { data: [], errorMessage: '' };
   countries: ICountry[] | undefined;
   options: string[] = [];
-
-  // control = new FormControl('');
+  trip: Trip | undefined;
   fromFilteredOptions!: Observable<string[]>;
   destinationFilteredOptions!: Observable<string[]>;
   selectedCountryDetails: string | undefined;
@@ -33,7 +35,8 @@ export class TravelComponent implements OnInit, OnChanges, OnDestroy, DoCheck, A
   form: FormGroup;
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder, private countryRoutingService: CountryRoutingService, private countryDataService: CountryDataService) {
+  constructor(private formBuilder: FormBuilder, private countryRoutingService: CountryRoutingService, private countryDataService: CountryDataService,
+    private tripService: TripService) {
     this.form = this.formBuilder.group(
       {
         [this.ORIGIN_NAME]: [
@@ -95,6 +98,7 @@ export class TravelComponent implements OnInit, OnChanges, OnDestroy, DoCheck, A
     pathResponse.subscribe(
       (data: any[]) => {
         this.results.data = data;
+        this.trip = this.getTrip(this.results.data);
       },
       (error: any) => {
         console.log(error);
@@ -117,10 +121,33 @@ export class TravelComponent implements OnInit, OnChanges, OnDestroy, DoCheck, A
     this.form.reset();
   }
 
+  getTrip(countryList: string[]): Trip {
+    const randomNumber = Math.floor(Math.random() * 10_000) + 1;
+    return {
+      countries: countryList.join(','),
+      name: this.results.data[0] + "_" + this.results.data[this.results.data.length-1] + randomNumber
+    }
+  }
+
+  saveTrip(): void {
+    console.log("zapisuje...")
+    // const randomNumber = Math.floor(Math.random() * 10_000) + 1;
+    // const trip: Trip = {
+    //   countries: this.results.data.join(','),
+    //   name: this.results.data[0] + "_" + this.results.data[this.results.data.length-1] + randomNumber
+    // }
+    if(this.trip) {
+      this.tripService.saveTrip(this.trip).subscribe();
+    }
+    // TODO: add validation
+    
+  }
+
   resetResults() {
     this.results.data = [];
     this.results.errorMessage = '';
     this.selectedCountryDetails = undefined;
+    this.trip = undefined;
   }
 
   onChipClicked(chip: MatChip) {

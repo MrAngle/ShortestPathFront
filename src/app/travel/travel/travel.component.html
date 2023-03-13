@@ -31,10 +31,11 @@
     </div>
 
     <div class="form-group">
-      <button type="submit" class="btn btn-primary">Calculate</button>
-      <button type="button" (click)="onReset()" class="btn btn-warning float-right">
+      <button type="submit" class="btn btn-primary margin-default-right ">Calculate</button>
+      <button type="button" (click)="onReset()" class="btn btn-warning float-right margin-default-right">
         Reset
       </button>
+      <button type="Save trip" *ngIf="this.results?.data?.length !== 0" class="btn btn-success" (click)="saveTrip()">Save Trip</button>
     </div>
   </form>
 
@@ -47,7 +48,12 @@
     </mat-card-content>
   </mat-card>
 
-  <mat-card class="card-margin" *ngIf="results && this.results.data.length !== 0">
+  <div class="margin-default-top" >
+    <app-trip-list *ngIf="this.trip" [trips]="[this.trip]"></app-trip-list>
+  </div>
+  
+<!-- 
+  <mat-card class="card-margin" *ngIf="this.results?.data?.length !== 0">
     <mat-card-header>
       <mat-card-title>Shortest Path</mat-card-title>
     </mat-card-header>
@@ -65,11 +71,13 @@
         </mat-chip-option>
       </mat-chip-listbox>
     </mat-card-content>
-  </mat-card>
+  </mat-card> -->
 
-  <div *ngIf="!!this.selectedCountryDetails">
+  
+
+  <!-- <div *ngIf="!!this.selectedCountryDetails">
     <app-country-description [countryCode]="this.selectedCountryDetails"></app-country-description>
-  </div>
+  </div> -->
   
 
 </div>

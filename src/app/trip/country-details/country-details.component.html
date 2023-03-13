@@ -1,6 +1,7 @@
-<mat-card *ngIf="this.countryCode && this.country">
+
+<mat-card *ngIf="this.countryCode && this.country; else emptyDetails">
     <mat-card-header>
-        <mat-card-title>{{ this.country.name }}</mat-card-title>
+        <mat-card-title>{{ country.name }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
         <p><strong>Region:</strong> {{ country.region }}</p>
@@ -9,3 +10,12 @@
         <p><strong>Coordinates:</strong> {{ country.coordinates.join(', ') }}</p>
     </mat-card-content>
 </mat-card>
+<ng-template #emptyDetails>
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Select country to get details</mat-card-title>
+        </mat-card-header>
+    </mat-card>
+</ng-template>
+
+
