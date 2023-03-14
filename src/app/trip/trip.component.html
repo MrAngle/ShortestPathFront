@@ -4,6 +4,7 @@
             <mat-card *ngFor="let trip of this.trips">
                 <mat-card-header>
                     <mat-card-title>Trip Name: {{trip.name}}</mat-card-title>
+                    <mat-card-subtitle *ngIf="trip.createdAt">Trip Date: {{trip.createdAt}}</mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content>
                     <mat-chip-listbox cdkDropListOrientation="horizontal">
@@ -23,11 +24,7 @@
         </div>
 
         <div class="col-md-4 mr-2">
-            <app-country-details  [countryCode]="this.selectedCountryDetails"></app-country-details>
+            <app-country-details [countryCode]="this.selectedCountryDetails"></app-country-details>
         </div>
     </div>
-
-
-    
-    
 </div>

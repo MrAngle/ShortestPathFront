@@ -20,6 +20,7 @@ export class CountryRoutingService {
   }  
   
   getCountryDetails(countryCode: string, countryIdentifier: CountryIdentifier): Observable<Country> {
+    // TODO: should use DTOs
     let params = new HttpParams()
       .set('countryIdentifierType', CountryIdentifier[countryIdentifier]);
     return this.http.get<Country>(this.baseUrl + `country/${countryCode}`, {params: params});

@@ -21,5 +21,5 @@ const routes: Routes = [
   ],
   declarations: []
 })
-export class Module2RoutingModule { }
+export class TravelRoutingModule { }
 

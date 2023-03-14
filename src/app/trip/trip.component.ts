@@ -15,13 +15,11 @@ export class TripComponent implements OnInit {
   constructor() {
   }
 
-  ngOnInit() {}
-  
+  ngOnInit() { }
 
-  onChipClicked(chip: MatChip) {
+
+  onChipClicked(chip: MatChip): void {
     this.selectedCountryDetails = chip.value.replace(/[^A-Za-z]/g, '')
-    console.log("this.selectedCountryDetails ")
-    console.log(this.selectedCountryDetails)
   }
-  
+
 }

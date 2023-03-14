@@ -12,11 +12,13 @@ export class TripHistoryComponent {
   trips: Trip[] = [];
 
   constructor(private tripService: TripService) {
+    this.loadTrips();
+  }
+
+  private loadTrips(): void {
     this.tripService.getAllTrips().subscribe(
       (data: Trip[]) => {
-        console.log(data);
         this.trips = data;
-        console.log(this.trips);
       }
       // TODO: add validation
     );

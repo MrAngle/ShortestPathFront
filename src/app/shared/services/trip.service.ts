@@ -20,6 +20,6 @@ export class TripService {
 
   saveTrip(trip: Trip): Observable<any> {
     return this.http.post(this.baseUrl + `trip`, trip);
-  }  
+  }
 
 }

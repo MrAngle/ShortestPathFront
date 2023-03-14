@@ -29,9 +29,8 @@ export class CountryDetailsComponent {
     console.log('CountryDescriptionComponent ngOnDestroy');
   }
 
-
   loadCountryDetails(): void {
-    if(this.countryCode) {
+    if (this.countryCode) {
       this.countryRoutingService.getCountryDetails(this.countryCode, CountryIdentifier.CCA_3).subscribe(
         (data: Country) => {
           this.country = data;

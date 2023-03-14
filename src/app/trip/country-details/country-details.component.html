@@ -1,5 +1,4 @@
-
-<mat-card *ngIf="this.countryCode && this.country; else emptyDetails">
+<mat-card *ngIf="this.country; else emptyDetails">
     <mat-card-header>
         <mat-card-title>{{ country.name }}</mat-card-title>
     </mat-card-header>
@@ -17,5 +16,3 @@
         </mat-card-header>
     </mat-card>
 </ng-template>
-
-

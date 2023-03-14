@@ -3,7 +3,7 @@
     <div class="row">
       <div class="form-group col-xs-6 col-sm-6">
         <mat-label>Origin</mat-label>
-        <mat-form-field class="example-full-width">
+        <mat-form-field class="full-width">
           <input type="text" placeholder="Select start country..." matInput formControlName={{ORIGIN_NAME}}
             [matAutocomplete]="auto">
           <mat-autocomplete #auto="matAutocomplete">
@@ -17,7 +17,7 @@
 
       <div class="form-group col-xs-6 col-sm-6">
         <mat-label>Destination</mat-label>
-        <mat-form-field class="example-full-width">
+        <mat-form-field appearance="fill" class="full-width">
           <input type="text" placeholder="Select destination country..." matInput
             formControlName={{this.DESTINATION_NAME}} [matAutocomplete]="destAuto">
           <mat-autocomplete #destAuto="matAutocomplete">
@@ -51,33 +51,5 @@
   <div class="margin-default-top" >
     <app-trip-list *ngIf="this.trip" [trips]="[this.trip]"></app-trip-list>
   </div>
-  
-<!-- 
-  <mat-card class="card-margin" *ngIf="this.results?.data?.length !== 0">
-    <mat-card-header>
-      <mat-card-title>Shortest Path</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <mat-chip-listbox cdkDropListOrientation="horizontal">
-        <mat-chip-option *ngFor="let countryName of this.results.data let last = last;" #myChips
-        (click)="onChipClicked(myChips)">
-          {{countryName}}
-          <span *ngIf="!last; else destinationIcon">
-            ➡
-          </span>
-          <ng-template #destinationIcon>
-            ✘
-          </ng-template>
-        </mat-chip-option>
-      </mat-chip-listbox>
-    </mat-card-content>
-  </mat-card> -->
-
-  
-
-  <!-- <div *ngIf="!!this.selectedCountryDetails">
-    <app-country-description [countryCode]="this.selectedCountryDetails"></app-country-description>
-  </div> -->
-  
 
 </div>
