@@ -16,7 +16,11 @@ export class CountryRoutingService {
   }
 
   getShortestsPath(from: String, to: String): Observable<String[]> {
-    return this.http.get<String[]>(this.baseUrl + `country/routing/${from}/${to}`);
+    let params = new HttpParams()
+      .set('from', from.toString())
+      .set('to', to.toString())
+
+    return this.http.get<String[]>(this.baseUrl + `country/routing`, {params: params});
   }  
   
   getCountryDetails(countryCode: string, countryIdentifier: CountryIdentifier): Observable<Country> {
