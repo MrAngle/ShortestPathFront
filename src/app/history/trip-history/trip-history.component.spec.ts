@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TripHistoryComponent } from './trip-history.component';
@@ -8,7 +9,8 @@ describe('TripHistoryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TripHistoryComponent ]
+      declarations: [ TripHistoryComponent ],
+      providers: [HttpClient]
     })
     .compileComponents();
 
